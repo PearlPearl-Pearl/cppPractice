@@ -28,3 +28,7 @@ secondproj.exe
 secondproj.sh
 thirdproj.cpp
 thirdproj.exe
+pointers.cpp
+pointers.exe
+student.exe
+DynamicMatrixLibrary.exe
