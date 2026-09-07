@@ -8,6 +8,7 @@ struct Matrix{
 
 Matrix create_matrix(int rows, int cols);
 void set(Matrix& A, int row, int col, double value);
+double get(const Matrix& A, int row, int col);
 
 int main(){
 
@@ -19,7 +20,7 @@ int main(){
 }
 
 Matrix create_matrix(int rows, int cols){
-    Matrix matrix = Matrix();
+    Matrix matrix;
     matrix.rows = rows;
     matrix.cols = cols;
     matrix.data = new double[rows*cols];
@@ -28,6 +29,9 @@ Matrix create_matrix(int rows, int cols){
 }
 
 void set(Matrix& A, int row, int col, double value){
-    // std::cout << A.data[0];
-    A.data[(row*col)-2] = value;
+    A.data[A.cols*(row-1)+(col-1)] = value;
+}
+
+double get(const Matrix& A, int row, int col){
+    return A.data[A.cols*(row-1)+(col-1)];
 }
