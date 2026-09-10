@@ -13,6 +13,7 @@ void print(const Matrix& A);
 Matrix add(const Matrix& A, const Matrix& B);
 void scale(Matrix& A, double c);
 Matrix matvec(const Matrix& A, const Matrix& x);
+Matrix multiply(const Matrix& A, const Matrix& B);
 
 int main(){
 
@@ -121,4 +122,28 @@ Matrix matvec(const Matrix& A, const Matrix& x){
         }
         return result;
     }
+}
+
+
+Matrix multiply(const Matrix& A, const Matrix& B){
+    Matrix C;
+
+    int A_rows = A.rows;
+    int B_cols = B.cols;
+    int A_cols = A.cols;
+
+    C.rows = A_rows;
+    C.cols = B_cols;
+    C.data = new double[A_rows*B_cols](); //This initializes all entries to 0
+
+    for (int i = 0; i < A_rows; i++){
+        for (int j = 0; j < B_cols; j++){
+            for (int k = 0; k < A_cols; k++){
+                C.data[(B_cols*i)+j] += (A.data[(A_cols*i)+k] * B.data[(B_cols*k)+j]);                 
+            }
+        }
+    }
+
+    return C;
+
 }
