@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 struct Matrix{
     int rows;
@@ -16,9 +17,65 @@ Matrix matvec(const Matrix& A, const Matrix& x);
 Matrix multiply(const Matrix& A, const Matrix& B);
 
 int main(){
-
     Matrix A = create_matrix(3, 2);
-    set(A, 3,1, 2);
+
+    set(A, 1, 1, 1);
+    set(A, 1, 2, 2);
+
+    set(A, 2, 1, 3);
+    set(A, 2, 2, 4);
+
+    set(A, 3, 1, 5);
+    set(A, 3, 2, 6);
+
+
+    Matrix B = create_matrix(3, 2);
+
+    set(B, 1, 1, 10);
+    set(B, 1, 2, 20);
+
+    set(B, 2, 1, 30);
+    set(B, 2, 2, 40);
+
+    set(B, 3, 1, 50);
+    set(B, 3, 2, 60);
+
+
+    Matrix x = create_matrix(2, 1);
+
+    set(x, 1, 1, 1);
+    set(x, 2, 1, 2);
+
+    std::cout<< "A is:\n";
+    print(A);
+    std::cout << '\n';
+    std::cout << "B is:\n";
+    print(B);
+    std::cout << '\n';
+    std::cout<<get(A, 3, 2)<<'\n';
+
+    std::cout << "A+B = \n";
+    print(add(A, B));
+
+    scale(A, 2);
+    std::cout<< "A scaled by 2 is:\n";
+    print(A);
+    
+    std::cout << "\nAx = \n";
+    print(matvec(A,x));
+
+    Matrix y = create_matrix(1, 3);
+
+    set(y, 1, 1, 1);
+    set(y, 1, 2, 2);
+    set(y, 1, 3, 3);
+
+    std::cout << "\nyA = \n";
+    print(matvec(y, A));
+
+    std::cout << "\nAB = \n";
+    print(multiply(A, B));
+
 
 
     return 0;
@@ -120,6 +177,13 @@ Matrix matvec(const Matrix& A, const Matrix& x){
             }
             result.data[i] = col_data;
         }
+        return result;
+    }
+
+    else{
+        result.cols = 0;
+        result.rows = 0;
+
         return result;
     }
 }
