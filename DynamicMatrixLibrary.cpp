@@ -15,6 +15,7 @@ Matrix add(const Matrix& A, const Matrix& B);
 void scale(Matrix& A, double c);
 Matrix matvec(const Matrix& A, const Matrix& x);
 Matrix multiply(const Matrix& A, const Matrix& B);
+void destroy(Matrix& A);
 
 int main(){
     Matrix A = create_matrix(3, 2);
@@ -55,14 +56,16 @@ int main(){
     std::cout<<get(A, 3, 2)<<'\n';
 
     std::cout << "A+B = \n";
-    print(add(A, B));
+    Matrix C = add(A, B);
+    print(C);
 
     scale(A, 2);
     std::cout<< "A scaled by 2 is:\n";
     print(A);
     
     std::cout << "\nAx = \n";
-    print(matvec(A,x));
+    Matrix d = matvec(A,x);
+    print(d);
 
     Matrix y = create_matrix(1, 3);
 
@@ -71,13 +74,22 @@ int main(){
     set(y, 1, 3, 3);
 
     std::cout << "\nyA = \n";
-    print(matvec(y, A));
+    Matrix e = matvec(y, A); 
+    print(e);
 
     std::cout << "\nAB = \n";
-    print(multiply(A, B));
+    Matrix F = multiply(A, B);
+    print(F);
 
 
-
+    destroy(A);
+    destroy(B);
+    destroy(x);
+    destroy(y);
+    destroy(C);
+    destroy(d);
+    destroy(e);
+    destroy(F);
     return 0;
 }
 
@@ -210,4 +222,8 @@ Matrix multiply(const Matrix& A, const Matrix& B){
 
     return C;
 
+}
+
+void destroy(Matrix& A){
+    delete[] A.data;
 }
